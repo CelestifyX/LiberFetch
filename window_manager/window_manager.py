@@ -13,9 +13,6 @@ def get_window_manager():
 
     try:
         with open(os.path.join(os.environ['HOME'], '.xinitrc'), 'r') as file:
-            lines          = file.readlines()
-            window_manager = lines[-1].split()[1]
-
-            return 'WM', window_manager
+            return 'WM', file.readlines()[-1].split()[1]
     except FileNotFoundError:
         return 'WM', 'Unknown'

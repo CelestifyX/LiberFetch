@@ -2,7 +2,7 @@ import os
 import subprocess
 
 def get_system_info():
-    hostname   = subprocess.check_output(['hostnamectl', '--static'], text=True).strip()
+    hostname   = subprocess.check_output(['hostnamectl', '--transient'], text=True).strip()
     os_info    = subprocess.check_output(['cat', '/etc/os-release'],  text=True).splitlines()
     os_name    = ''
     os_version = ''
