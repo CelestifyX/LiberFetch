@@ -1,7 +1,7 @@
 import os
 
-from colors.colors import Colors
-from system_info.system_info import get_system_info
+from colors.colors                 import Colors
+from system_info.system_info       import get_system_info
 from window_manager.window_manager import get_window_manager
 
 def main():
