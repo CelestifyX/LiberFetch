@@ -1,6 +1,8 @@
 import os
 import subprocess
 
+from colors.colors import Colors
+
 def check_command_exists(command):
     try:
         subprocess.run(["which", command], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -22,14 +24,15 @@ def list_packages():
         if check_command_exists(manager):
             command = [manager]
 
-            if manager == "pacman":
-                command.append("-Q")
-            elif manager == "yay":
-                command.append("-Q")
-            elif manager == "snap":
-                command.append("list")
-            elif manager == "flatpak":
-                command.extend(["list", "--columns=application"])
+            command_map =  {
+                "pacman":  ["-Qq"],
+                "yay":     ["-Qq"],
+                "snap":    ["list"],
+                "flatpak": ["list", "--columns=application"]
+            }
+
+            if manager in command_map:
+                command.extend(command_map[manager])
 
             try:
                 output       = subprocess.run(command, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
@@ -43,3 +46,11 @@ def list_packages():
 
     installed_packages.sort(key=lambda x: x[1], reverse=True)
     return ', '.join(f"{count} ({name})" for name, count in installed_packages)
+
+def get_info_memory(memory_info):
+    total_memory = int(memory_info.split()[1])
+    used_memory  = int(memory_info.split()[2])
+    percentage   = round(((used_memory / total_memory) * 100))
+    color        = (Colors.green if percentage <= 50 else (Colors.orange if percentage <= 80 else Colors.red))
+
+    return f"{used_memory}MiB / {total_memory}MiB ({color}{percentage}%{Colors.RBW})"

@@ -12,13 +12,12 @@ def get_system_info():
         elif line.startswith('VERSION='):
             os_version = line.split('=')[1].strip('"')
 
-    os_arch      = os.uname().machine
-    kernel       = subprocess.check_output(['uname',  '-sr'], text=True).strip()
-    uptime       = subprocess.check_output(['uptime', '-p'],  text=True).strip().split('up ')[-1]
-    packages     = list_packages()
-    memory_info  = subprocess.check_output(['free',   '-m'],  text=True).splitlines()[1]
-    total_memory = memory_info.split()[1]
-    used_memory  = memory_info.split()[2]
-    memory       = f"{used_memory}MiB / {total_memory}MiB"
+    os_arch     = os.uname().machine
+    kernel      = subprocess.check_output(['uname',  '-sr'], text=True).strip()
+    uptime      = subprocess.check_output(['uptime', '-p'],  text=True).strip().split('up ')[-1]
+    memory_info = subprocess.check_output(['free',   '-m'],  text=True).splitlines()[1]
+
+    packages    = list_packages()
+    memory      = get_info_memory(memory_info)
 
     return hostname, f"{os_name} {os_version}{os_arch}", kernel, uptime, packages, memory
