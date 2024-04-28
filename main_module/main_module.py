@@ -16,5 +16,5 @@ def main():
 {Colors.RBC}     /  {Colors.RC}__  \\     {Colors.RBC}UPTIME:    {Colors.RBW}{uptime}{Colors.reset}
 {Colors.RC}    /  (  )  \\    {Colors.RBC}PACKAGES:  {Colors.RBW}{packages}{Colors.reset}
 {Colors.RC}   / __|  |__\\\\   {Colors.RBC}MEMORY:    {Colors.RBW}{memory}{Colors.reset}
-{Colors.RC}  ///        \\\\\  {Colors.RBC}{env_type}:        {Colors.RBW}{window_manager}{Colors.reset}
+{Colors.RC}  ///        \\\\\\  {Colors.RBC}{env_type}:        {Colors.RBW}{window_manager}{Colors.reset}
 """)
