@@ -26,7 +26,7 @@ def list_packages():
 
             command_map =  {
                 "pacman":  ["-Qq"],
-                "yay":     ["-Qq"],
+                "yay":     ["-Qm"],
                 "snap":    ["list"],
                 "flatpak": ["list", "--columns=application"]
             }
